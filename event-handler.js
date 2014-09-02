@@ -1,5 +1,6 @@
 /**
  * event-handler - make any constructor an event emitter
+ * version: 1.0.0
  * https://bitbucket.org/c2group/event-handler
  * @preserve
  */
@@ -46,10 +47,12 @@ var EventHandler = (function () {
     var proto = Emitter.prototype;
 
     proto.on = on;
-    proto.bind = on;
     proto.off = off;
-    proto.unbind = off;
     proto.emit = emit;
+
+    // legacy extensions
+    proto.bind = on;
+    proto.unbind = off;
     proto.trigger = emit;
 
     return Emitter;
