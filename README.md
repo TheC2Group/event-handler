@@ -1,7 +1,8 @@
 event-handler
 =============
 
-A lightweight event emitter.
+**A lightweight event emitter.**  
+This began as a fork of [microevent.js](https://github.com/jeromeetienne/microevent.js).
 
 ## Example
 
