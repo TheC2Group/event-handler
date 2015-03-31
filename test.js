@@ -8,7 +8,7 @@
 
 'use strict';
 
-var EventHandler = require('./event-handler.js');
+var eventHandler = require('./event-handler.js');
 var assert = require('assert');
 
 describe('event-handler', function () {
@@ -17,14 +17,14 @@ describe('event-handler', function () {
     var Foo = function () {};
 
     // mixin the class to the event-handler
-    EventHandler(Foo);
+    eventHandler(Foo);
 
     // create instances of the class
     var a = new Foo();
     var b = new Foo();
 
     // create an instance of the event-handler
-    var c = new EventHandler();
+    var c = eventHandler();
 
     it('should allow you to add an event to a class', function () {
 

@@ -1,11 +1,11 @@
 /**
  * event-handler - make any constructor an event emitter
- * version: 1.0.0
+ * version: 2.0.0
  * https://bitbucket.org/c2group/event-handler
  * @preserve
  */
 
-var EventHandler = (function () {
+var eventHandler = (function () {
     'use strict';
 
     var on = function (event, fn) {
@@ -35,16 +35,29 @@ var EventHandler = (function () {
         }
     };
 
-    var Emitter = function (_class) {
+    var handler = function (_class) {
+
+        // constructor
+        if (arguments.length === 0) {
+            if (this instanceof handler) return;
+            return new handler();
+        }
+
         // mixin
         if (typeof _class === 'function') {
             _class.prototype.on = on;
             _class.prototype.off = off;
             _class.prototype.emit = emit;
         }
+
+        if (typeof _class === 'object') {
+            _class.on = on;
+            _class.off = off;
+            _class.emit = emit;
+        }
     };
 
-    var proto = Emitter.prototype;
+    var proto = handler.prototype;
 
     proto.on = on;
     proto.off = off;
@@ -55,10 +68,10 @@ var EventHandler = (function () {
     proto.unbind = off;
     proto.trigger = emit;
 
-    return Emitter;
+    return handler;
 }());
 
 // export commonjs
 if (typeof module !== 'undefined' && ('exports' in module)) {
-    module.exports = EventHandler;
+    module.exports = eventHandler;
 }
