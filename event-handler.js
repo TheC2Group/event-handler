@@ -1,7 +1,7 @@
 /**
  * event-handler - make any constructor an event emitter
  * version: 2.0.0
- * https://bitbucket.org/c2group/event-handler
+ * https://stash.c2mpg.com:8443/projects/C2/repos/event-handler
  * @preserve
  */
 
