@@ -58,6 +58,25 @@ describe('event-handler', function () {
 
     });
 
+    it('should allow you to add multiple events with spaces', function () {
+
+        b.on('one two three', function (value) {
+
+            assert.equal(value, 'beep');
+        });
+
+        a.emit('two', 'beep');
+    });
+
+    it('should allow you to remove multiple events with spaces', function () {
+
+        assert.equal(b._events['three'].length, 1);
+
+        b.off('one three');
+
+        assert.equal(typeof b._events['three'], 'undefined');
+    });
+
     it('should allow you to remove all events', function () {
 
         var newFn = function () {

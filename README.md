@@ -1,46 +1,35 @@
 event-handler
 =============
 
-**A lightweight event emitter.**  
-This began as a fork of [microevent.js](https://github.com/jeromeetienne/microevent.js).
-
-## Example
-
-First we define a class that will emit events. This is a ticker, it is triggering 'tick' event every second, and adds the current date as a parameter.
+Create an event emitter by either creating a new object or mixin in an existing object or constructor.
 
 ```js
-var Ticker = function () {
-    var self = this;
-    setInterval(function () {
-        self.emit('tick', new Date());
-    }, 1000);
-};
+// fresh emitter object
+var emitter = eventHandler();
 ```
-
-We mixin _EventHandler_ into _Ticker_ and we are all set.
-
-```
-EventHandler(Ticker);
-```
-
-Now lets actually use the _Ticker_ Class. First, create the instance.
 
 ```js
-var ticker = new Ticker();
+var obj = {};
+
+// mixin existing object
+eventHandler(obj);
 ```
 
-Bind our _tick_ event with its data parameter.
+```js
+var Constructor = function () {};
+
+// mixin existing constructor
+eventHandler(Constructor);
+```
+
+Once you've created the emitter, use the methods to turn `on` or `off` functions or to `emit` events.
 
 ```js
-ticker.on('tick', function (date) {
-    console.log('notified date', date);
+obj.on('start stop', function (status) {
+    console.log('the program has ' + status);
 });
-```
 
-And you will see this output:
+obj.off('stop');
 
-```
-notified date Tue, 22 Mar 2011 14:43:41 GMT
-notified date Tue, 22 Mar 2011 14:43:42 GMT
-...
+obj.emit('start', 'started'); // the program has started
 ```
