@@ -27,13 +27,16 @@ describe('event-handler', function () {
     var c = eventHandler();
 
     it('should allow you to add an event to a class', function () {
+        var status = '';
 
         a.on('blerg', function (value) {
 
-            assert.equal(value, 'beep');
+            status = value;
         });
 
         a.emit('blerg', 'beep');
+
+        assert.equal(status, 'beep');
     });
 
     it('should add 1 event to "a" but zero events to "b"', function () {
@@ -59,13 +62,16 @@ describe('event-handler', function () {
     });
 
     it('should allow you to add multiple events with spaces', function () {
+        var status = '';
 
         b.on('one two three', function (value) {
 
-            assert.equal(value, 'beep');
+            status = value;
         });
 
-        a.emit('two', 'beep');
+        b.emit('two', 'beep');
+
+        assert.equal(status, 'beep');
     });
 
     it('should allow you to remove multiple events with spaces', function () {
@@ -90,6 +96,29 @@ describe('event-handler', function () {
         assert.equal(typeof a._events['blerg'], 'undefined');
     });
 
+    it('should call all events before the colon', function () {
+        var count = 0;
+
+        a.on('subevent', function (name) {
+            assert.equal(name, 'sub');
+            count += 1;
+        });
+
+        a.on('subevent:extra', function (name) {
+            assert.equal(name, 'sub');
+            count += 1;
+        });
+
+        a.on('subevent:extra:more', function (name) {
+            assert.equal(name, 'sub');
+            count += 1;
+        });
+
+        a.emit('subevent:extra:more', 'sub');
+
+        assert.equal(count, 3);
+    });
+
     it('should allow you to use it as an instance with legacy methods', function () {
 
         c.on('blerg-on', function (value) {
@@ -105,7 +134,6 @@ describe('event-handler', function () {
         c.emit('blerg-on', 'beep');
 
         c.trigger('blerg-bind', 'boop');
-
     });
 
 });

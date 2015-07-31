@@ -1,6 +1,6 @@
 /**
  * event-handler - create event emitters
- * version: 2.1.0
+ * version: 2.2.0
  * https://stash.c2mpg.com:8443/projects/C2/repos/event-handler
  * @preserve
  */
@@ -53,9 +53,17 @@ var eventHandler = (function () {
     };
 
     var emit = function (event /* , args... */) {
-        this._events = this._events || {};
-        if (event in this._events === false) return;
         var args = Array.prototype.slice.call(arguments, 1);
+
+        var lastIndex = event.lastIndexOf(':');
+        if (lastIndex > -1) {
+            emit.call(this, event.substring(0, lastIndex), args);
+        }
+
+        this._events = this._events || {};
+
+        if (event in this._events === false) return;
+
         this._events[event].forEach(function (fn) {
             fn.apply(this, args);
         }, this);
