@@ -1,6 +1,6 @@
 /**
  * event-handler - create event emitters
- * version: 2.2.2
+ * version: 2.3.0
  * https://github.com/TheC2Group/event-handler
  * @preserve
  */
@@ -69,12 +69,23 @@ var eventHandler = (function () {
         }, this);
     };
 
+    var EventConstructor = function () {};
+
+    var proto = EventConstructor.prototype;
+    proto.on = on;
+    proto.off = off;
+    proto.emit = emit;
+
+    // legacy extensions
+    proto.bind = on;
+    proto.unbind = off;
+    proto.trigger = emit;
+
     var handler = function (_class) {
 
         // constructor
         if (arguments.length === 0) {
-            if (this instanceof handler) return;
-            return new handler();
+            return new EventConstructor();
         }
 
         // mixin
@@ -89,18 +100,9 @@ var eventHandler = (function () {
             _class.off = off;
             _class.emit = emit;
         }
+
+        return _class;
     };
-
-    var proto = handler.prototype;
-
-    proto.on = on;
-    proto.off = off;
-    proto.emit = emit;
-
-    // legacy extensions
-    proto.bind = on;
-    proto.unbind = off;
-    proto.trigger = emit;
 
     return handler;
 }());
