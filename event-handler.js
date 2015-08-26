@@ -1,7 +1,7 @@
 /**
  * event-handler - create event emitters
- * version: 2.2.1
- * https://stash.c2mpg.com:8443/projects/C2/repos/event-handler
+ * version: 2.2.2
+ * https://github.com/TheC2Group/event-handler
  * @preserve
  */
 

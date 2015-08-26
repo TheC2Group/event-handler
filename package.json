@@ -1,0 +1,22 @@
+{
+  "name": "event-handler",
+  "version": "2.2.2",
+  "description": "Create an event emitter by either creating a new object or mixin in an existing object or constructor.",
+  "main": "event-handler.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheC2Group/event-handler.git"
+  },
+  "keywords": [
+    "events"
+  ],
+  "author": "The C2 Group",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheC2Group/event-handler/issues"
+  },
+  "homepage": "https://github.com/TheC2Group/event-handler"
+}
