@@ -33,3 +33,18 @@ obj.off('stop');
 
 obj.emit('start', 'started'); // the program has started
 ```
+
+
+Test
+----
+
+```
+$ npm install -g mocha
+$ mocha
+```
+
+
+License
+-------
+
+MIT - Copyright (c) 2015 The C2 Group
