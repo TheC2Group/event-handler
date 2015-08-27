@@ -47,4 +47,4 @@ $ mocha
 License
 -------
 
-MIT - Copyright (c) 2015 The C2 Group
+MIT © [The C2 Group](https://c2experience.com)

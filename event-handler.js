@@ -1,8 +1,7 @@
-/**
- * event-handler - create event emitters
+/*!
+ * Event Handler - create event emitters
  * version: 2.3.0
  * https://github.com/TheC2Group/event-handler
- * @preserve
  */
 
 var eventHandler = (function () {
