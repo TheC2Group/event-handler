@@ -1,7 +1,8 @@
 /*!
  * Event Handler - create event emitters
- * version: 2.3.0
  * https://github.com/TheC2Group/event-handler
+ * @version 2.3.1
+ * @license MIT (c) The C2 Group (c2experience.com)
  */
 
 var eventHandler = (function () {
