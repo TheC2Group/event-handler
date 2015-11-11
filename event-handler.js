@@ -57,7 +57,7 @@ var eventHandler = (function () {
 
         var lastIndex = event.lastIndexOf(':');
         if (lastIndex > -1) {
-            emit.call(this, event.substring(0, lastIndex), args);
+            emit.apply(this, [event.substring(0, lastIndex)].concat(args));
         }
 
         this._events = this._events || {};

@@ -99,22 +99,25 @@ describe('event-handler', function () {
     it('should call all events before the colon', function () {
         var count = 0;
 
-        a.on('subevent', function (name) {
+        a.on('subevent', function (name, args) {
             assert.equal(name, 'sub');
+            assert.equal(args, 'args');
             count += 1;
         });
 
-        a.on('subevent:extra', function (name) {
+        a.on('subevent:extra', function (name, args) {
             assert.equal(name, 'sub');
+            assert.equal(args, 'args');
             count += 1;
         });
 
-        a.on('subevent:extra:more', function (name) {
+        a.on('subevent:extra:more', function (name, args) {
             assert.equal(name, 'sub');
+            assert.equal(args, 'args');
             count += 1;
         });
 
-        a.emit('subevent:extra:more', 'sub');
+        a.emit('subevent:extra:more', 'sub', 'args');
 
         assert.equal(count, 3);
     });
