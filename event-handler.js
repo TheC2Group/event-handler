@@ -1,7 +1,7 @@
 /*!
  * Event Handler - create event emitters
  * https://github.com/TheC2Group/event-handler
- * @version 2.3.1
+ * @version 2.3.2
  * @license MIT (c) The C2 Group (c2experience.com)
  */
 
