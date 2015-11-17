@@ -1,6 +1,6 @@
 {
   "name": "c2-event-handler",
-  "version": "2.3.2",
+  "version": "2.4.0",
   "description": "Create an event emitter by either creating a new object or mixin in an existing object or constructor.",
   "jsnext:main": "event-handler.js",
   "main": "cjs/event-handler.js",

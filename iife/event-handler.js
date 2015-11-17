@@ -1,7 +1,7 @@
 /*!
  * c2-event-handler
  * https://github.com/TheC2Group/event-handler
- * @version 2.3.2
+ * @version 2.4.0
  * @license MIT (c) The C2 Group (c2experience.com)
  */
 var eventHandler = (function () { 'use strict';
