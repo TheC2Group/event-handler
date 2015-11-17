@@ -8,7 +8,7 @@
 
 'use strict';
 
-var eventHandler = require('./event-handler.js');
+var eventHandler = require('./cjs/event-handler.js');
 var assert = require('assert');
 
 describe('event-handler', function () {

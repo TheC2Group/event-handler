@@ -2,10 +2,15 @@
   "name": "c2-event-handler",
   "version": "2.3.2",
   "description": "Create an event emitter by either creating a new object or mixin in an existing object or constructor.",
-  "main": "event-handler.js",
+  "jsnext:main": "event-handler.js",
+  "main": "cjs/event-handler.js",
+  "export": "eventHandler",
   "scripts": {
     "test": "mocha",
-    "dist": "uglifyjs event-handler.js -o dist/event-handler.min.js --comments"
+    "iife": "rollup -c rollup-iife.config.js",
+    "cjs": "rollup -c rollup-cjs.config.js",
+    "umd": "rollup -c rollup-umd.config.js",
+    "build": "npm run iife && npm run cjs && npm run umd"
   },
   "repository": {
     "type": "git",
@@ -15,9 +20,14 @@
     "events"
   ],
   "author": "The C2 Group",
-  "license": "MIT",
+  "license": "MIT (c) The C2 Group (c2experience.com)",
   "bugs": {
     "url": "https://github.com/TheC2Group/event-handler/issues"
   },
-  "homepage": "https://github.com/TheC2Group/event-handler"
+  "homepage": "https://github.com/TheC2Group/event-handler",
+  "devDependencies": {
+    "babel-preset-es2015-rollup": "^1.0.0",
+    "rollup": "^0.21.0",
+    "rollup-plugin-babel": "^2.1.0"
+  }
 }

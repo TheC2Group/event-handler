@@ -1,6 +1,13 @@
 'use strict';
 
-var on = function (event, fn) {
+var babelHelpers = {};
+
+babelHelpers.typeof = function (obj) {
+  return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj;
+};
+
+babelHelpers;
+var on = function on(event, fn) {
     if (typeof event !== 'string' || !event.length || typeof fn === 'undefined') return;
 
     if (event.indexOf(' ') > -1) {
@@ -15,7 +22,7 @@ var on = function (event, fn) {
     this._events[event].push(fn);
 };
 
-var off = function (event, fn) {
+var off = function off(event, fn) {
     if (typeof event !== 'string' || !event.length) return;
 
     if (event.indexOf(' ') > -1) {
@@ -44,7 +51,7 @@ var off = function (event, fn) {
     }
 };
 
-var emit = function (event /* , args... */) {
+var emit = function emit(event /* , args... */) {
     var args = Array.prototype.slice.call(arguments, 1);
 
     var lastIndex = event.lastIndexOf(':');
@@ -61,7 +68,7 @@ var emit = function (event /* , args... */) {
     }, this);
 };
 
-var EventConstructor = function () {};
+var EventConstructor = function EventConstructor() {};
 
 var proto = EventConstructor.prototype;
 proto.on = on;
@@ -73,7 +80,7 @@ proto.bind = on;
 proto.unbind = off;
 proto.trigger = emit;
 
-var handler = function (_class) {
+var handler = function handler(_class) {
 
     // constructor
     if (arguments.length === 0) {
@@ -87,7 +94,7 @@ var handler = function (_class) {
         _class.prototype.emit = emit;
     }
 
-    if (typeof _class === 'object') {
+    if ((typeof _class === 'undefined' ? 'undefined' : babelHelpers.typeof(_class)) === 'object') {
         _class.on = on;
         _class.off = off;
         _class.emit = emit;
@@ -96,4 +103,4 @@ var handler = function (_class) {
     return _class;
 };
 
-export default handler;
+module.exports = handler;
