@@ -96,4 +96,6 @@ var handler = function (_class) {
     return _class;
 };
 
+handler.EventConstructor = EventConstructor;
+
 export default handler;

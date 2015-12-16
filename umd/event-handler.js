@@ -113,6 +113,8 @@
         return _class;
     };
 
+    handler.EventConstructor = EventConstructor;
+
     return handler;
 
 }));

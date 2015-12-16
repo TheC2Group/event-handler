@@ -22,6 +22,17 @@ var Constructor = function () {};
 eventHandler(Constructor);
 ```
 
+```js
+import * as eventHandler from 'c2-event-handler';
+
+// es6 class inheritance
+class emitter extends eventHandler.EventConstructor {
+    constructor() {
+        super();
+    }
+}
+```
+
 Once you've created the emitter, use the methods to turn `on` or `off` functions or to `emit` events.
 
 ```js

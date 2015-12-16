@@ -109,6 +109,8 @@ var eventHandler = (function () { 'use strict';
         return _class;
     };
 
+    handler.EventConstructor = EventConstructor;
+
     return handler;
 
 })();

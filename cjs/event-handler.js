@@ -103,4 +103,6 @@ var handler = function handler(_class) {
     return _class;
 };
 
+handler.EventConstructor = EventConstructor;
+
 module.exports = handler;
