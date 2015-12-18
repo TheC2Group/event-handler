@@ -1,7 +1,7 @@
 /*!
  * c2-event-handler
  * https://github.com/TheC2Group/event-handler
- * @version 2.4.0
+ * @version 2.5.1
  * @license MIT (c) The C2 Group (c2experience.com)
  */
 var eventHandler = (function () { 'use strict';
@@ -14,12 +14,14 @@ var eventHandler = (function () { 'use strict';
 
     babelHelpers;
     var on = function on(event, fn) {
+        var _this = this;
+
         if (typeof event !== 'string' || !event.length || typeof fn === 'undefined') return;
 
         if (event.indexOf(' ') > -1) {
             event.split(' ').forEach(function (eventName) {
-                on.call(this, eventName, fn);
-            }, this);
+                on.call(_this, eventName, fn);
+            });
             return;
         }
 
@@ -29,12 +31,14 @@ var eventHandler = (function () { 'use strict';
     };
 
     var off = function off(event, fn) {
+        var _this2 = this;
+
         if (typeof event !== 'string' || !event.length) return;
 
         if (event.indexOf(' ') > -1) {
             event.split(' ').forEach(function (eventName) {
-                off.call(this, eventName, fn);
-            }, this);
+                off.call(_this2, eventName, fn);
+            });
             return;
         }
 
@@ -57,12 +61,16 @@ var eventHandler = (function () { 'use strict';
         }
     };
 
-    var emit = function emit(event /* , args... */) {
-        var args = Array.prototype.slice.call(arguments, 1);
+    var emit = function emit(event) {
+        var _this3 = this;
+
+        for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+            args[_key - 1] = arguments[_key];
+        }
 
         var lastIndex = event.lastIndexOf(':');
         if (lastIndex > -1) {
-            emit.apply(this, [event.substring(0, lastIndex)].concat(args));
+            emit.call.apply(emit, [this, event.substring(0, lastIndex)].concat(args));
         }
 
         this._events = this._events || {};
@@ -70,8 +78,8 @@ var eventHandler = (function () { 'use strict';
         if (event in this._events === false) return;
 
         this._events[event].forEach(function (fn) {
-            fn.apply(this, args);
-        }, this);
+            fn.apply(_this3, args);
+        });
     };
 
     var EventConstructor = function EventConstructor() {};

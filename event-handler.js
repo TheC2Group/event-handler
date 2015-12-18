@@ -1,12 +1,12 @@
 'use strict';
 
-var on = function (event, fn) {
+const on = function (event, fn) {
     if (typeof event !== 'string' || !event.length || typeof fn === 'undefined') return;
 
     if (event.indexOf(' ') > -1) {
-        event.split(' ').forEach(function (eventName) {
+        event.split(' ').forEach(eventName => {
             on.call(this, eventName, fn);
-        }, this);
+        });
         return;
     }
 
@@ -15,13 +15,13 @@ var on = function (event, fn) {
     this._events[event].push(fn);
 };
 
-var off = function (event, fn) {
+const off = function (event, fn) {
     if (typeof event !== 'string' || !event.length) return;
 
     if (event.indexOf(' ') > -1) {
-        event.split(' ').forEach(function (eventName) {
+        event.split(' ').forEach(eventName => {
             off.call(this, eventName, fn);
-        }, this);
+        });
         return;
     }
 
@@ -34,7 +34,7 @@ var off = function (event, fn) {
         return;
     }
 
-    var index = this._events[event].indexOf(fn);
+    const index = this._events[event].indexOf(fn);
     if (index > -1) {
         if (this._events[event].length === 1) {
             delete this._events[event];
@@ -44,26 +44,24 @@ var off = function (event, fn) {
     }
 };
 
-var emit = function (event /* , args... */) {
-    var args = Array.prototype.slice.call(arguments, 1);
-
-    var lastIndex = event.lastIndexOf(':');
+const emit = function (event, ...args) {
+    const lastIndex = event.lastIndexOf(':');
     if (lastIndex > -1) {
-        emit.apply(this, [event.substring(0, lastIndex)].concat(args));
+        emit.call(this, event.substring(0, lastIndex), ...args);
     }
 
     this._events = this._events || {};
 
     if (event in this._events === false) return;
 
-    this._events[event].forEach(function (fn) {
+    this._events[event].forEach(fn => {
         fn.apply(this, args);
-    }, this);
+    });
 };
 
-var EventConstructor = function () {};
+const EventConstructor = function () {};
 
-var proto = EventConstructor.prototype;
+const proto = EventConstructor.prototype;
 proto.on = on;
 proto.off = off;
 proto.emit = emit;
@@ -73,7 +71,7 @@ proto.bind = on;
 proto.unbind = off;
 proto.trigger = emit;
 
-var handler = function (_class) {
+const handler = function (_class) {
 
     // constructor
     if (arguments.length === 0) {
